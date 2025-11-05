@@ -1,0 +1,71 @@
+GET http://localhost:4000/users
+
+### Login
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "email":"maguire@gmail.com",
+    "password":"password"
+}
+
+### Register
+POST http://localhost:4000/register
+Content-Type: application/json
+
+{
+    "email":"maguire@gmail.com",
+    "password":"password",
+    "nama":"Harry Maguire",
+    "level":"musyrif"
+}
+
+### Load Halaqoh
+GET http://localhost:4000/halaqoh?id_halaqoh=1
+
+### Load Presensi Santri
+GET http://localhost:4000/presensi/santri?id_halaqoh=1&tanggal=04-11-2025&jam=subuh
+
+### Load Presensi Musyrif
+GET http://localhost:4000/presensi/musyrif?id_user=1&tanggal=04-11-2025
+
+### Load Santri By Id Halaqoh
+GET http://localhost:4000/santri?id_halaqoh=2
+
+### Load Setoran Santri By Id Santri
+GET http://localhost:4000/setoran?id_santri=2
+
+### Add Presensi Santri
+POST http://localhost:4000/presensi/santri
+Content-Type: application/json
+
+{
+    "id_santri":"1",
+    "tanggal":"05-11-2025",
+    "jam":"subuh",
+    "status":"hadir"
+}
+
+### Add Presensi Musyrif
+POST http://localhost:4000/presensi/musyrif
+Content-Type: application/json
+
+{
+    "id_user":"1",
+    "tanggal":"05-11-2025",
+    "jam":"subuh"
+}
+
+### Add Setoran Santri
+POST http://localhost:4000/setoran
+Content-Type: application/json
+
+{
+    "id_santri":"1",
+    "tanggal":"05-11-2025",
+    "jam":"subuh",
+    "id_surah_mulai":"1",
+    "ayat_mulai":"1",
+    "id_surah_akhir":"2",
+    "ayat_akhir":"2"
+}
