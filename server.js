@@ -30,7 +30,7 @@ async function startServer() {
       console.log("Server is running on port 4000");
     });
   } catch (error) {
-    console.error("Error connecting to MongoDB:", error);
+    res.status(500).send("Error connecting to MongoDB:", error);
   }
 }
 
