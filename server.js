@@ -6,10 +6,6 @@ const mongoose = require("mongoose");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Connected To API With MongoDB");
-});
-
 const loginRouter = require("./routes/login");
 const registerRouter = require("./routes/register");
 const halaqohRouter = require("./routes/halaqoh");
@@ -20,7 +16,7 @@ const setoranRouter = require("./routes/setoran");
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 30000, 
+  serverSelectionTimeoutMS: 30000,
 };
 
 async function startServer() {
@@ -29,6 +25,7 @@ async function startServer() {
     console.log("Connected to MongoDB");
 
     app.listen(4000, () => {
+      res.send("Server is running with MondoDB")
       console.log("Server is running on port 4000");
     });
   } catch (error) {
@@ -36,7 +33,7 @@ async function startServer() {
   }
 }
 
-mongoose.set('bufferCommands', false);  
+mongoose.set("bufferCommands", false);
 
 startServer();
 
