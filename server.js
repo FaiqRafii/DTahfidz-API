@@ -17,23 +17,28 @@ const presensiRouter = require("./routes/presensi");
 const santriRouter = require("./routes/santri");
 const setoranRouter = require("./routes/setoran");
 
-const options={
-  useNewUrlParse:true,
-  useUnifiedTopology:true,
-  serverSelectionTimeoutMS:30000
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 30000, 
+};
+
+async function startServer() {
+  try {
+    await mongoose.connect(process.env.MONGO_URL, options);
+    console.log("Connected to MongoDB");
+
+    app.listen(4000, () => {
+      console.log("Server is running on port 4000");
+    });
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
+  }
 }
 
-mongoose
-  .connect(process.env.MONGO_URL,options)
-  .then(() => {
-    app.listen(4000);
-    console.log("Connected to MongoDB");
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+mongoose.set('bufferCommands', false);  
 
-mongoose.set('bufferCommands',false)
+startServer();
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
@@ -42,4 +47,4 @@ app.use("/presensi", presensiRouter);
 app.use("/santri", santriRouter);
 app.use("/setoran", setoranRouter);
 
-module.exports=app
+module.exports = app;
