@@ -17,9 +17,8 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000,
+  bufferCommands:false
 };
-
-mongoose.set("bufferCommands", false);
 
 async function startServer() {
   try {
