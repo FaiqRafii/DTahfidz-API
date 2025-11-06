@@ -19,13 +19,13 @@ const options = {
   serverSelectionTimeoutMS: 30000,
 };
 
+mongoose.set("bufferCommands", false);
+
 async function startServer() {
   try {
-    // Wait for MongoDB connection
     await mongoose.connect(process.env.MONGO_URL, options);
     console.log("Connected to MongoDB");
 
-    // Now start the Express server
     app.listen(4000, () => {
       console.log("Server is running on port 4000");
     });
@@ -35,7 +35,6 @@ async function startServer() {
 }
 
 
-mongoose.set("bufferCommands", false);
 
 startServer();
 
