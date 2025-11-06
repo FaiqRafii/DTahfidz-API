@@ -19,7 +19,7 @@ const setoranRouter = require("./routes/setoran");
 
 const options={
   useNewUrlParse:true,
-  useUnifiedToplogy:true,
+  useUnifiedTopology:true,
   serverSelectionTimeoutMS:30000
 }
 
@@ -32,6 +32,8 @@ mongoose
   .catch((error) => {
     console.log(error);
   });
+
+mongoose.set('bufferCommands',false)
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
