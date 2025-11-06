@@ -1,11 +1,9 @@
-GET http://localhost:4000/users
-
 ### Login
 POST http://localhost:4000/login
 Content-Type: application/json
 
 {
-    "email":"maguire@gmail.com",
+    "email":"faiq@gmail.com",
     "password":"password"
 }
 
@@ -14,33 +12,33 @@ POST http://localhost:4000/register
 Content-Type: application/json
 
 {
-    "email":"maguire@gmail.com",
+    "email":"rafii@gmail.com",
     "password":"password",
-    "nama":"Harry Maguire",
+    "nama":"Rafii Wahyudi",
     "level":"musyrif"
 }
 
-### Load Halaqoh
-GET http://localhost:4000/halaqoh?id_halaqoh=1
+### Load Halaqoh By Id User
+GET http://localhost:4000/halaqoh?id_user=690be83f277cc05a17c71bcd
 
 ### Load Presensi Santri
-GET http://localhost:4000/presensi/santri?id_halaqoh=1&tanggal=04-11-2025&jam=subuh
+GET http://localhost:4000/presensi/santri?id_halaqoh=690beea31693580d231dbf25&tanggal=05-11-2025&jam=subuh
 
 ### Load Presensi Musyrif
-GET http://localhost:4000/presensi/musyrif?id_user=1&tanggal=04-11-2025
+GET http://localhost:4000/presensi/musyrif?id_user=690be83f277cc05a17c71bcd&tanggal=05-11-2025
 
 ### Load Santri By Id Halaqoh
-GET http://localhost:4000/santri?id_halaqoh=2
+GET http://localhost:4000/santri?id_halaqoh=690beea31693580d231dbf25
 
 ### Load Setoran Santri By Id Santri
-GET http://localhost:4000/setoran?id_santri=2
+GET http://localhost:4000/setoran?id_santri=690c0d146b6baf501890883d
 
 ### Add Presensi Santri
 POST http://localhost:4000/presensi/santri
 Content-Type: application/json
 
 {
-    "id_santri":"1",
+    "id_santri":"690c0d146b6baf501890883d",
     "tanggal":"05-11-2025",
     "jam":"subuh",
     "status":"hadir"
@@ -51,7 +49,7 @@ POST http://localhost:4000/presensi/musyrif
 Content-Type: application/json
 
 {
-    "id_user":"1",
+    "id_user":"690be83f277cc05a17c71bcd",
     "tanggal":"05-11-2025",
     "jam":"subuh"
 }
@@ -61,11 +59,32 @@ POST http://localhost:4000/setoran
 Content-Type: application/json
 
 {
-    "id_santri":"1",
+    "id_santri":"690c0d146b6baf501890883d",
     "tanggal":"05-11-2025",
     "jam":"subuh",
     "id_surah_mulai":"1",
     "ayat_mulai":"1",
     "id_surah_akhir":"2",
     "ayat_akhir":"2"
+}
+
+### Add Santri
+POST http://localhost:4000/santri
+Content-Type: application/json
+
+  {
+    "nama":"Raihan Rasyid",
+    "kelas":"xi",
+    "id_halaqoh":"690beea31693580d231dbf25"
+}
+
+### Add Halaqoh
+POST http://localhost:4000/halaqoh
+Content-Type: application/json
+
+  {
+    "halaqoh":"Takhosus B",
+    "jumlah_santri":25,
+    "lokasi_halaqoh":"Masjid Lama",
+    "id_user":"690beca5c12752acd4805618"
 }
