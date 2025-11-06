@@ -17,8 +17,14 @@ const presensiRouter = require("./routes/presensi");
 const santriRouter = require("./routes/santri");
 const setoranRouter = require("./routes/setoran");
 
+const options={
+  useNewUrlParse:true,
+  useUnifiedToplogy:true,
+  serverSelectionTimeoutMS:30000
+}
+
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.MONGO_URL,options)
   .then(() => {
     app.listen(4000);
     console.log("Connected to MongoDB");
