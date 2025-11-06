@@ -17,7 +17,7 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000,
-  bufferCommands:false
+  bufferCommands: false,
 };
 
 async function startServer() {
@@ -25,27 +25,26 @@ async function startServer() {
     await mongoose.connect(process.env.MONGO_URL, options);
     console.log("Connected to MongoDB");
 
+    // Register routers only after successful connection
+    app.use("/login", loginRouter);
+    app.use("/register", registerRouter);
+    app.use("/halaqoh", halaqohRouter);
+    app.use("/presensi", presensiRouter);
+    app.use("/santri", santriRouter);
+    app.use("/setoran", setoranRouter);
+
     app.listen(4000, () => {
       console.log("Server is running on port 4000");
     });
   } catch (error) {
-    res.status(500).send("Error connecting to MongoDB:", error);
+    console.error("Error connecting to MongoDB:", error);
   }
 }
-
-
 
 startServer();
 
 app.get("/", (req, res) => {
   res.send("Server is running with MongoDB");
 });
-
-app.use("/login", loginRouter);
-app.use("/register", registerRouter);
-app.use("/halaqoh", halaqohRouter);
-app.use("/presensi", presensiRouter);
-app.use("/santri", santriRouter);
-app.use("/setoran", setoranRouter);
 
 module.exports = app;
