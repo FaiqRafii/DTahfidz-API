@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const serverles=require('serverless-http')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -34,6 +35,4 @@ app.use("/presensi", presensiRouter);
 app.use("/santri", santriRouter);
 app.use("/setoran", setoranRouter);
 
-module.exports.handler=async (event,context)=>{
-  return app(event,contex)
-}
+module.exports.handler=serverless(app)
