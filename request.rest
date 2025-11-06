@@ -1,5 +1,5 @@
 ### Login
-POST http://localhost:4000/login
+POST https://dtahfidz-api.vercel.app/login
 Content-Type: application/json
 
 {
@@ -19,7 +19,7 @@ Content-Type: application/json
 }
 
 ### Load Halaqoh By Id User
-GET http://localhost:4000/halaqoh?id_user=690be83f277cc05a17c71bcd
+GET https://dtahfidz-api.vercel.app/halaqoh?id_user=690be83f277cc05a17c71bcd
 
 ### Load Presensi Santri
 GET http://localhost:4000/presensi/santri?id_halaqoh=690beea31693580d231dbf25&tanggal=05-11-2025&jam=subuh

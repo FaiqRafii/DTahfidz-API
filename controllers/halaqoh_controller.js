@@ -28,6 +28,7 @@ const getHalaqohByUser = async (req, res) => {
           halaqoh: 1,
           jumlah_santri: 1,
           lokasi_halaqoh: 1,
+          id_user:1,
           _id: 1
         }
       );
