@@ -21,11 +21,12 @@ const options = {
 
 async function startServer() {
   try {
+    // Wait for MongoDB connection
     await mongoose.connect(process.env.MONGO_URL, options);
     console.log("Connected to MongoDB");
 
+    // Now start the Express server
     app.listen(4000, () => {
-      res.send("Server is running with MondoDB")
       console.log("Server is running on port 4000");
     });
   } catch (error) {
@@ -33,9 +34,14 @@ async function startServer() {
   }
 }
 
+
 mongoose.set("bufferCommands", false);
 
 startServer();
+
+app.get("/", (req, res) => {
+  res.send("Server is running with MongoDB");
+});
 
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
