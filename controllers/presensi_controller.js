@@ -3,43 +3,75 @@ const PresensiSantri = require("../models/presensi_santri");
 const PresensiMusyrif = require("../models/presensi_musyrif");
 
 const addPresensiSantri = async (req, res) => {
-  const { id_santri, tanggal, jam, status } = req.body;
+  const presensiData = req.body;
+
+  try {
+    const presensiPromises = presensiData.map(async (item) => {
+      const [hari, bulan, tahun] = item.tanggal.split("-");
+      const formattedDate = `${tahun}-${bulan}-${hari}`;
+
+      const existingPresensi = await PresensiSantri.findOne({
+        id_santri: new mongoose.Types.ObjectId(item.id_santri),
+        tanggal: formattedDate,
+        jam: item.jam,
+      });
+
+      if (existingPresensi) {
+        existingPresensi.status = item.status;
+        await existingPresensi.save();
+      } else {
+        const newPresensi = new PresensiSantri({
+          tanggal: formattedDate,
+          jam: item.jam,
+          status: item.status,
+          id_santri: new mongoose.Types.ObjectId(item.id_santri),
+        });
+
+        await newPresensi.save();
+      }
+    });
+    await Promise.all(presensiPromises);
+    res.sendStatus(201);
+  } catch (e) {
+    res.status(500).send(`Error processing presensi santri: ${e}`);
+  }
+
+  // const { id_santri, tanggal, jam, status } = req.body;
+
+  // try {
+  //   PresensiSantri.create({
+  //     tanggal: formattedDate,
+  //     jam: jam,
+  //     status: status,
+  //     id_santri: new mongoose.Types.ObjectId(id_santri),
+  //   });
+
+  //   res.sendStatus(201);
+  // } catch (e) {
+  //   res.status(500).send(`Error inserting presensi santri into database: ${e}`);
+  // }
+};
+
+const addPresensiMusyrif = async (req, res) => {
+  const { id_user, tanggal, jam } = req.body;
 
   const [hari, bulan, tahun] = tanggal.split("-");
   const formattedDate = `${tahun}-${bulan}-${hari}`;
 
   try {
-    PresensiSantri.create({
+    PresensiMusyrif.create({
       tanggal: formattedDate,
       jam: jam,
-      status: status,
-      id_santri: new mongoose.Types.ObjectId(id_santri),
+      id_user: new mongoose.Types.ObjectId(id_user),
     });
 
     res.sendStatus(201);
   } catch (e) {
-    res.status(500).send(`Error inserting presensi santri into database: ${e}`);
+    res
+      .status(500)
+      .send(`Error inserting presensi musyrif into database: ${e}`);
   }
 };
-
-const addPresensiMusyrif= async (req,res)=>{
-    const {id_user,tanggal,jam}=req.body
-
-    const [hari,bulan,tahun]=tanggal.split("-")
-    const formattedDate=`${tahun}-${bulan}-${hari}`
-
-    try{
-        PresensiMusyrif.create({
-            tanggal:formattedDate,
-            jam:jam,
-            id_user:new mongoose.Types.ObjectId(id_user)
-        })
-
-        res.sendStatus(201)
-    }catch(e){
-        res.status(500).send(`Error inserting presensi musyrif into database: ${e}`)
-    }
-}
 
 const loadPresensiSantri = async (req, res) => {
   const { id_halaqoh, tanggal, jam } = req.query;
@@ -118,4 +150,9 @@ const loadPresensiMusyrif = async (req, res) => {
   //   );
 };
 
-module.exports = { addPresensiSantri, addPresensiMusyrif,loadPresensiSantri, loadPresensiMusyrif };
+module.exports = {
+  addPresensiSantri,
+  addPresensiMusyrif,
+  loadPresensiSantri,
+  loadPresensiMusyrif,
+};
