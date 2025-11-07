@@ -31,9 +31,11 @@ const changePassword=async (req,res)=>{
 
     const existingUser=await Users.findById(new mongoose.Types.ObjectId(id_user))
     
-    const encryptedPassword=bcrypt.hash(newPassword,10);
+    const encryptedPassword=await bcrypt.hash(newPassword,10);
 
     existingUser.password=encryptedPassword;
+    
+    await existingUser.save();
 
     res.sendStatus(200);
 
