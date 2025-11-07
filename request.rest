@@ -88,3 +88,13 @@ Content-Type: application/json
     "lokasi_halaqoh":"Masjid Lama",
     "id_user":"690beca5c12752acd4805618"
 }
+
+### Change Password
+POST http://localhost:4000/users/change-password
+Content-Type: application/json
+
+{
+    "id_user":"690be83f277cc05a17c71bcd",
+    "newPassword":"password1"
+}
+ 

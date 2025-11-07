@@ -16,6 +16,7 @@ const halaqohRouter = require("./routes/halaqoh");
 const presensiRouter = require("./routes/presensi");
 const santriRouter = require("./routes/santri");
 const setoranRouter = require("./routes/setoran");
+const userRouter=require("./routes/users")
 
 mongoose
   .connect(process.env.MONGO_URL)
@@ -33,5 +34,6 @@ app.use("/halaqoh", halaqohRouter);
 app.use("/presensi", presensiRouter);
 app.use("/santri", santriRouter);
 app.use("/setoran", setoranRouter);
+app.use("/users",userRouter);
 
 module.exports=app

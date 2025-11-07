@@ -1,7 +1,8 @@
+const mongoose = require("mongoose");
 const Users = require("../models/users");
-const bcrypt=require('bcrypt')
+const bcrypt = require("bcrypt");
 
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
   let { email, password, nama, level } = req.body;
 
   password = bcrypt.hash(password, 10, async (err, encrypted) => {
@@ -23,9 +24,23 @@ const createUser = (req, res) => {
   });
 };
 
-const getUsersByHalaqoh=async (req,res)=>{
-    const {id_halaqoh}=req.query.id_halaqoh
-    console.log(id_halaqoh);
+const changePassword=async (req,res)=>{
+  const {id_user,newPassword}=req.body
+
+  try{
+
+    const existingUser=await Users.findById(new mongoose.Types.ObjectId(id_user))
+    
+    const encryptedPassword=bcrypt.hash(newPassword,10);
+
+    existingUser.password=encryptedPassword;
+
+    res.sendStatus(200);
+
+  }catch(e){
+    res.status(500).send(`Error in change password: ${e.message}`);
+
+  }
 }
 
 const login= async (req, res) => {
@@ -79,4 +94,4 @@ const login= async (req, res) => {
     // );
   }
 
-module.exports={createUser,login}
+module.exports={createUser,login,changePassword}
