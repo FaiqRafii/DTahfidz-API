@@ -7,7 +7,7 @@ const loadSetoranById = async (req, res) => {
   try {
     const setoran = await Setoran.find({
       id_santri: new mongoose.Types.ObjectId(id_santri),
-    });
+    }).sort({tanggal:-1});
 
     if (!setoran) {
       res.status(404).send("No Setoran Found");
