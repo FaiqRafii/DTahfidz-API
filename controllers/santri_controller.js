@@ -7,7 +7,7 @@ const getSantriByHalaqoh = async (req, res) => {
   try {
     const santri = await Santri.find(
       { id_halaqoh: new mongoose.Types.ObjectId(id_halaqoh) },
-      { _id: 1, nama: 1, id_halaqoh: 1 }
+      { _id: 1, nama: 1, id_halaqoh: 1,kelas:1}
     ).sort({nama:1});
     res.status(200).json(santri);
   } catch (e) {

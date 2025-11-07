@@ -22,13 +22,13 @@ Content-Type: application/json
 GET https://dtahfidz-api.vercel.app/halaqoh?id_user=690be83f277cc05a17c71bcd
 
 ### Load Presensi Santri
-GET http://localhost:4000/presensi/santri?id_halaqoh=690beea31693580d231dbf25&tanggal=05-11-2025&jam=subuh
+GET https://dtahfidz-api.vercel.app/presensi/santri?id_halaqoh=690beea31693580d231dbf25&tanggal=07-11-2025&jam=subuh
 
 ### Load Presensi Musyrif
-GET http://localhost:4000/presensi/musyrif?id_user=690be83f277cc05a17c71bcd&tanggal=05-11-2025
+GET https://dtahfidz-api.vercel.app/presensi/musyrif?id_user=690be83f277cc05a17c71bcd&tanggal=05-11-2025
 
 ### Load Santri By Id Halaqoh
-GET http://localhost:4000/santri?id_halaqoh=690beea31693580d231dbf25
+GET https://dtahfidz-api.vercel.app/santri?id_halaqoh=690beea31693580d231dbf25
 
 ### Load Setoran Santri By Id Santri
 GET http://localhost:4000/setoran?id_santri=690c0d146b6baf501890883d
