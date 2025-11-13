@@ -1,11 +1,12 @@
 ### Login
 POST https://dtahfidz-api.vercel.app/login
 Content-Type: application/json
-
 {
     "email":"faiq@gmail.com",
     "password":"password"
 }
+
+### 
 
 ### Register
 POST http://localhost:4000/register
@@ -32,6 +33,23 @@ GET https://dtahfidz-api.vercel.app/santri?id_halaqoh=690beea31693580d231dbf25
 
 ### Load Setoran Santri By Id Santri
 GET http://localhost:4000/setoran?id_santri=690c0d146b6baf501890883d
+
+### Update Setoran Santri By Id Setoran
+PUT http://localhost:4000/setoran
+Content-Type: application/json
+
+{
+    "id_setoran":"690e48acbb5eed3ac4da0122",
+    "tanggal":"13-11-2025",
+    "jam":"malam",
+    "id_surah_mulai": "2",
+    "ayat_mulai": "22",
+    "id_surah_akhir": "3",
+    "ayat_akhir": "33"
+}
+
+### Delete Setoran By Id Setoran
+DELETE http://localhost:4000/setoran?id_setoran=690e48acbb5eed3ac4da0122
 
 ### Add Presensi Santri
 POST http://localhost:4000/presensi/santri
@@ -90,11 +108,11 @@ Content-Type: application/json
 }
 
 ### Change Password
-POST http://localhost:4000/users/change-password
+POST https://dtahfidz-api.vercel.app/users/change-password
 Content-Type: application/json
 
 {
     "id_user":"690be83f277cc05a17c71bcd",
-    "newPassword":"password1"
+    "newPassword":"password"
 }
  

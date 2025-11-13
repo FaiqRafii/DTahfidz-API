@@ -66,4 +66,39 @@ const addSetoran = async (req, res) => {
   }
 };
 
-module.exports = { loadSetoranById, addSetoran };
+const updateSetoran= async(req,res)=>{
+  const {id_setoran,tanggal,jam,id_surah_mulai,ayat_mulai,id_surah_akhir,ayat_akhir}=req.body
+
+  const [hari, bulan, tahun]=tanggal.split("-")
+  const formattedDate=`${tahun}-${bulan}-${hari}`
+
+  try{
+    const existingSetoran=await Setoran.findById(id_setoran)
+  
+    existingSetoran.tanggal=formattedDate
+    existingSetoran.jam=jam
+    existingSetoran.id_surah_mulai=id_surah_mulai
+    existingSetoran.ayat_mulai=ayat_mulai
+    existingSetoran.id_surah_akhir=id_surah_akhir
+    existingSetoran.ayat_akhir=ayat_akhir
+  
+    await existingSetoran.save()
+  
+    res.sendStatus(200)
+  }catch(e){
+    res.status(500).json({message:`Error dalam mengupdate data setoran id: ${id_setoran}: ${e}`})
+  }
+}
+
+const deleteSetoran=async (req,res)=>{
+  const {id_setoran}=req.query
+
+  try{
+    await Setoran.findByIdAndDelete(id_setoran)
+
+    res.sendStatus(200)
+  }catch(e){
+    res.status(500).json({messsage:`Error menghapus setoran dari database: ${e}`})
+  }
+}
+module.exports = { loadSetoranById, addSetoran ,updateSetoran,deleteSetoran};
